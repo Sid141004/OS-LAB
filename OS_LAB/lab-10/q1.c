@@ -139,7 +139,7 @@ int predict(int pages[], int frames[], int num_pages, int num_frames, int index)
     int result = -1, farthest = index;
     for (int i = 0; i < num_frames; i++)
     {
-        int j;
+        /*int j;
         for (j = 0; i < num_pages; j++)
         {
             if (frames[i] == pages[j])
@@ -155,7 +155,27 @@ int predict(int pages[], int frames[], int num_pages, int num_frames, int index)
 
         // if page never found
         if (j == num_pages)
-            return i;
+            return i;*/
+        int arr[num_frames];
+        for(int i=0;i<num_frames;i++){
+            int count=0;
+            for(int j=index;j<num_pages;j++){
+                if(pages[j]==frames[i]){
+                    break;
+                }
+                count++;
+            }
+            arr[i]=count;
+        }
+        int min=0;
+        int res=0;
+        for(int i=0;i<num_frames;i++){
+            if(min<arr[i]){
+                min=arr[i];
+                res=i;
+            }
+        }
+        return res;
     }
 
     return (result == -1) ? 0 : result;
